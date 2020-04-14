@@ -41,42 +41,42 @@ func (e *EmojiSyncApplicationImpl) Sync(tgtServs []entity.ServerContext) (err er
 	}
 
 	// Sync emoji
-	for i, srcInv := range inventories {
+	for i, dstInv := range inventories {
 		// TODO : Memorize already loaded emoji to reduce discord CDN server's load
-		tgtServs := srcInv.ServerContext
-		for _, dstInv := range inventories {
-			srcID := srcInv.ServerContext.GuildID
+		dstServ := dstInv.ServerContext
+		for _, srcInv := range inventories {
 			dstID := dstInv.ServerContext.GuildID
-			srcEmojis := srcInv.EmojiContexts
+			srcID := srcInv.ServerContext.GuildID
 			dstEmojis := dstInv.EmojiContexts
+			srcEmojis := srcInv.EmojiContexts
 
 			// Skip sync itself
-			if srcInv.Equals(&dstInv) {
+			if dstInv.Equals(&srcInv) {
 				continue
 			}
 
 			// Get emojis needed to sync
-			addingEmojiCtxs := e.emojiArrayModel.Unique(srcEmojis, dstEmojis)
+			addingEmojiCtxs := e.emojiArrayModel.Unique(dstEmojis, srcEmojis)
 			addingEmoji, err := e.emojiInfra.FetchAll(addingEmojiCtxs)
 			if err != nil {
 				return err
 			}
 
-			// Add emojis into a source server
+			// Add emojis into a destination server
 			for _, emoji := range addingEmoji {
 				// Write processing log
-				logMsg := fmt.Sprintf("%s => [ %s ] => %s", dstID, emoji.Name, srcID)
+				logMsg := fmt.Sprintf("%s => [ %s ] => %s", srcID, emoji.Name, dstID)
 				log.Println(logMsg)
 
-				err = e.emojiInfra.Add(&emoji, &tgtServs)
+				err = e.emojiInfra.Add(&emoji, &dstServ)
 				if err != nil {
 					return err
 				}
 			}
 
 			// To avoid to sync redundantly,
-			// add already processed emoji into source inventory
-			srcInv.EmojiContexts = append(srcInv.EmojiContexts, addingEmojiCtxs...)
+			// add already processed emoji into destination inventory
+			dstInv.EmojiContexts = append(dstInv.EmojiContexts, addingEmojiCtxs...)
 			inventories[i].EmojiContexts = append(inventories[i].EmojiContexts, addingEmojiCtxs...)
 		}
 	}
