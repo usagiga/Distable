@@ -1,9 +1,11 @@
 package application
 
 import (
+	"fmt"
 	"github.com/usagiga/Distable/domain"
 	"github.com/usagiga/Distable/entity"
 	"github.com/usagiga/Distable/infrastructure"
+	"log"
 )
 
 type EmojiSyncApplicationImpl struct {
@@ -43,6 +45,8 @@ func (e *EmojiSyncApplicationImpl) Sync(tgtServs []entity.ServerContext) (err er
 		// TODO : Memorize already loaded emoji to reduce discord CDN server's load
 		tgtServs := srcInv.ServerContext
 		for _, dstInv := range inventories {
+			srcID := srcInv.ServerContext.GuildID
+			dstID := dstInv.ServerContext.GuildID
 			srcEmojis := srcInv.EmojiContexts
 			dstEmojis := dstInv.EmojiContexts
 
@@ -60,6 +64,10 @@ func (e *EmojiSyncApplicationImpl) Sync(tgtServs []entity.ServerContext) (err er
 
 			// Add emojis into a source server
 			for _, emoji := range addingEmoji {
+				// Write processing log
+				logMsg := fmt.Sprintf("%s => [ %s ] => %s", dstID, emoji.Name, srcID)
+				log.Println(logMsg)
+
 				err = e.emojiInfra.Add(&emoji, &tgtServs)
 				if err != nil {
 					return err
