@@ -1,5 +1,7 @@
 ![distable](distable.png)
 
+<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
 # Distable
 Sync emojis among your own discord servers.
 Thanks to it, you / your guild's members can use same emoji on relevant communities.
