@@ -5,9 +5,12 @@ type EmojiContext struct {
 	// ID is emoji id on Discord.
 	ID string
 	// Name is its screen name.
-	Name          string
+	Name string
+	// RequireColons is decided behavior on chat in Discord.
+	// It is not applied synced server currently.
 	RequireColons bool
-	Animated      bool
+	// Animated is represents the emoji is animated emoji(gif) or not.
+	Animated bool
 }
 
 // Equals compare between this and specific `EmojiContext`.
@@ -16,6 +19,8 @@ func (e *EmojiContext) Equals(dst *EmojiContext) bool {
 	return e.Name == dst.Name
 }
 
+// GetExtension returns the emoji's image file extension.
+// Its value is only `png` or `gif`.
 func (e *EmojiContext) GetExtension() string {
 	if e.Animated {
 		return "gif"

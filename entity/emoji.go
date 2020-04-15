@@ -6,10 +6,11 @@ import "github.com/vincent-petithory/dataurl"
 type Emoji struct {
 	EmojiContext
 
+	// DataURI represents the emoji's actual image.
 	DataURI *dataurl.DataURL
 }
 
-// ToURIString returns DataURI string according to its `DataURI`
+// ToURIString returns DataURI string according to its `DataURI`.
 func (e *Emoji) ToURIString() string {
 	return e.DataURI.String()
 }

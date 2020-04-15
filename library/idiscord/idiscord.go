@@ -13,20 +13,23 @@ const (
 	customEmojiEndpoint = "emojis/"
 )
 
+// APIClient is client to connect the Discord CDN server
 type APIClient struct{}
 
+// NewIdiscord initializes Idiscord's client.
 func NewIdiscord() *APIClient {
 	return &APIClient{}
 }
 
+// GetEmoji fetches emoji from Discord CDN server.
 func (client *APIClient) GetEmoji(emojiId string, ext string) (imageUri *dataurl.DataURL, err error) {
-	// Validate args
+	// Validate args.
 	if !(ext == "png" || ext == "gif") {
 		errMsg := fmt.Sprintf("Extension \"%s\" is not compatible with this EP. You must use \"png\" or \"gif\"", ext)
 		return nil, errors.New(errMsg)
 	}
 
-	// Get
+	// Get.
 	url := baseUri + customEmojiEndpoint + emojiId + "." + ext
 	res, err := http.Get(url)
 	if err != nil {
@@ -34,7 +37,7 @@ func (client *APIClient) GetEmoji(emojiId string, ext string) (imageUri *dataurl
 	}
 	defer res.Body.Close()
 
-	// Convert to URI
+	// Convert to URI.
 	imgBytes, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, nil

@@ -6,11 +6,13 @@ import (
 	"io/ioutil"
 )
 
+// ConfigRepositoryImpl is struct implemented `ConfigRepository`.
 type ConfigRepositoryImpl struct {
 	configPath     string
 	configInstance *entity.Config
 }
 
+// NewConfigRepository initializes `ConfigRepository`
 func NewConfigRepository(configPath string) ConfigRepository {
 	return &ConfigRepositoryImpl{
 		configPath:     configPath,
@@ -18,6 +20,8 @@ func NewConfigRepository(configPath string) ConfigRepository {
 	}
 }
 
+// Get gets Distable config from cache / file.
+// Its behavior is as singleton.
 func (c *ConfigRepositoryImpl) Get() *entity.Config {
 	// If not initialized, load config
 	if c.configInstance == nil {
@@ -27,6 +31,8 @@ func (c *ConfigRepositoryImpl) Get() *entity.Config {
 	return c.configInstance
 }
 
+// Load loads Distable config from file.
+// It is aimed to initialize `configInstance`.
 func (c *ConfigRepositoryImpl) Load() (config *entity.Config, err error) {
 	config = &entity.Config{}
 

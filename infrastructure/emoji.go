@@ -8,40 +8,45 @@ import (
 	"github.com/usagiga/Distable/library/idiscord"
 )
 
+// EmojiInfraImpl is struct implemented `EmojiInfra`.
 type EmojiInfraImpl struct{}
 
+// NewEmojiInfra initializes `EmojiInfra`.
 func NewEmojiInfra() EmojiInfra {
 	return &EmojiInfraImpl{}
 }
 
+// Add adds emoji into a specific server.
 func (e *EmojiInfraImpl) Add(emoji *entity.Emoji, destServCtx *entity.ServerContext) (err error) {
 	token := destServCtx.GetBearerToken()
 	name := emoji.Name
 	imgURI := emoji.ToURIString()
 
-	// Create guild emoji
+	// Establish a connection to the Discord API server.
 	discord, err := discordgo.New(token)
 	if err != nil {
 		return err
 	}
 
+	// Create guild emoji.
 	_, err = discord.GuildEmojiCreate(destServCtx.GuildID, name, imgURI, nil)
 
 	return err
 }
 
+// Fetch fetches actual emoji image from its context.
 func (e *EmojiInfraImpl) Fetch(emojiCtx *entity.EmojiContext) (emoji *entity.Emoji, err error) {
 	id := emojiCtx.ID
 	ext := emojiCtx.GetExtension()
-
-	// Fetch image
 	imgClient := idiscord.NewIdiscord()
+
+	// Fetch image.
 	imgUri, err := imgClient.GetEmoji(id, ext)
 	if err != nil {
 		return nil, err
 	}
 
-	// Return result
+	// Parse results into internal type.
 	emoji = &entity.Emoji{
 		EmojiContext: *emojiCtx,
 		DataURI:      imgUri,
@@ -50,6 +55,7 @@ func (e *EmojiInfraImpl) Fetch(emojiCtx *entity.EmojiContext) (emoji *entity.Emo
 	return emoji, nil
 }
 
+// FetchAll fetches actual emoji image from its context array one-by-one.
 func (e *EmojiInfraImpl) FetchAll(emojiCtxs []entity.EmojiContext) (emojis []entity.Emoji, err error) {
 	imgClient := idiscord.NewIdiscord()
 	emojis = []entity.Emoji{}
@@ -58,13 +64,13 @@ func (e *EmojiInfraImpl) FetchAll(emojiCtxs []entity.EmojiContext) (emojis []ent
 		id := emojiCtx.ID
 		ext := emojiCtx.GetExtension()
 
-		// Fetch image
+		// Fetch image.
 		imgUri, err := imgClient.GetEmoji(id, ext)
 		if err != nil {
 			return nil, err
 		}
 
-		// Pack result
+		// Parse results into internal type.
 		emoji := entity.Emoji{
 			EmojiContext: emojiCtx,
 			DataURI:      imgUri,
@@ -76,18 +82,20 @@ func (e *EmojiInfraImpl) FetchAll(emojiCtxs []entity.EmojiContext) (emojis []ent
 	return emojis, nil
 }
 
+// FetchAllContext fetches emoji contexts on a specific server.
 func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis []entity.EmojiContext, err error) {
 	emojis = []entity.EmojiContext{}
 	guildID := servCtx.GuildID
 	token := servCtx.GetBearerToken()
 
-	// Fetch guild emojis
+	// Establish a connection to the Discord API server.
 	discord, err := discordgo.New(token)
 	if err != nil {
 		errMsg := fmt.Sprintf("EmojiInfra.FetchAllContext(): Can't establish connection using specific access token: %s", err)
 		return nil, errors.New(errMsg)
 	}
 
+	// Fetch guild emojis.
 	guild, err := discord.Guild(guildID)
 	if err != nil {
 		errMsg := fmt.Sprintf("EmojiInfra.FetchAllContext(): Can't get guild(ID: %s) status: %s", guildID, err)
@@ -96,7 +104,7 @@ func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis [
 
 	rawEmojis := guild.Emojis
 
-	// Parse into internal type
+	// Parse results into internal type.
 	for _, rawEmoji := range rawEmojis {
 		eCtx := entity.EmojiContext{
 			ID:            rawEmoji.ID,
