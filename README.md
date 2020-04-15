@@ -1,5 +1,10 @@
+![distable](distable.png)
+
 # Distable
 Sync emojis among your own discord servers.
+Thanks to it, you / your guild's members can use same emoji on relevant communities.
+
+Distable is inspired by [FromAtom/Utsushie](https://github.com/FromAtom/Utsushie).
 
 ## Installation
 
@@ -51,3 +56,7 @@ Sync all server's emojis automatically :tada:
 - Go (1.14 or higher)
 - [github.com/bwmarrin/discordgo](https://github.com/bwmarrin/discordgo)
 - [github.com/vincent-petithory/dataurl](https://github.com/vincent-petithory/dataurl)
+
+## License
+
+MIT
