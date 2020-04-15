@@ -41,7 +41,7 @@ func (e *EmojiSyncApplicationImpl) Sync(tgtServs []entity.ServerContext) (err er
 	}
 
 	// Sync emoji
-	for i, dstInv := range inventories {
+	for _, dstInv := range inventories {
 		// TODO : Memorize already loaded emoji to reduce discord CDN server's load
 		dstServ := dstInv.ServerContext
 		for _, srcInv := range inventories {
@@ -77,7 +77,6 @@ func (e *EmojiSyncApplicationImpl) Sync(tgtServs []entity.ServerContext) (err er
 			// To avoid to sync redundantly,
 			// add already processed emoji into destination inventory
 			dstInv.EmojiContexts = append(dstInv.EmojiContexts, addingEmojiCtxs...)
-			inventories[i].EmojiContexts = append(inventories[i].EmojiContexts, addingEmojiCtxs...)
 		}
 	}
 
