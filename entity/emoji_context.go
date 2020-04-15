@@ -5,9 +5,9 @@ type EmojiContext struct {
 	// ID is emoji id on Discord.
 	ID string
 	// Name is its screen name.
-	Name string
+	Name          string
 	RequireColons bool
-	Animated bool
+	Animated      bool
 }
 
 // Equals compare between this and specific `EmojiContext`.

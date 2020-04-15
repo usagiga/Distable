@@ -9,11 +9,11 @@ import (
 )
 
 const (
-	baseUri = "https://cdn.discordapp.com/"
+	baseUri             = "https://cdn.discordapp.com/"
 	customEmojiEndpoint = "emojis/"
 )
 
-type APIClient struct {}
+type APIClient struct{}
 
 func NewIdiscord() *APIClient {
 	return &APIClient{}

@@ -7,7 +7,7 @@ import (
 )
 
 type ConfigRepositoryImpl struct {
-	configPath string
+	configPath     string
 	configInstance *entity.Config
 }
 

@@ -4,7 +4,7 @@ import (
 	"github.com/usagiga/Distable/entity"
 )
 
-type EmojiArrayModelImpl struct {}
+type EmojiArrayModelImpl struct{}
 
 func NewEmojiArrayModel() EmojiArrayModel {
 	return &EmojiArrayModelImpl{}

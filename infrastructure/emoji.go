@@ -8,7 +8,7 @@ import (
 	"github.com/usagiga/Distable/library/idiscord"
 )
 
-type EmojiInfraImpl struct {}
+type EmojiInfraImpl struct{}
 
 func NewEmojiInfra() EmojiInfra {
 	return &EmojiInfraImpl{}
@@ -44,7 +44,7 @@ func (e *EmojiInfraImpl) Fetch(emojiCtx *entity.EmojiContext) (emoji *entity.Emo
 	// Return result
 	emoji = &entity.Emoji{
 		EmojiContext: *emojiCtx,
-		DataURI: imgUri,
+		DataURI:      imgUri,
 	}
 
 	return emoji, nil
@@ -67,7 +67,7 @@ func (e *EmojiInfraImpl) FetchAll(emojiCtxs []entity.EmojiContext) (emojis []ent
 		// Pack result
 		emoji := entity.Emoji{
 			EmojiContext: emojiCtx,
-			DataURI: imgUri,
+			DataURI:      imgUri,
 		}
 
 		emojis = append(emojis, emoji)
@@ -99,10 +99,10 @@ func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis [
 	// Parse into internal type
 	for _, rawEmoji := range rawEmojis {
 		eCtx := entity.EmojiContext{
-			ID: rawEmoji.ID,
-			Name: rawEmoji.Name,
+			ID:            rawEmoji.ID,
+			Name:          rawEmoji.Name,
 			RequireColons: rawEmoji.RequireColons,
-			Animated: rawEmoji.Animated,
+			Animated:      rawEmoji.Animated,
 		}
 
 		emojis = append(emojis, eCtx)
@@ -110,4 +110,3 @@ func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis [
 
 	return emojis, nil
 }
-

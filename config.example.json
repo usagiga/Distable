@@ -1,6 +1,12 @@
 {
   "servers": [
-    {"auth_token": "YOUR_APP'S_BOT_TOKEN_HERE", "guild_id": "A_SERVER_ID"},
-    {"auth_token": "YOUR_APP'S_BOT_TOKEN_HERE", "guild_id": "B_SERVER_ID"}
+    {
+      "auth_token": "YOUR_APP'S_BOT_TOKEN_HERE",
+      "guild_id": "A_SERVER_ID"
+    },
+    {
+      "auth_token": "YOUR_APP'S_BOT_TOKEN_HERE",
+      "guild_id": "B_SERVER_ID"
+    }
   ]
 }

@@ -19,7 +19,7 @@ func NewEmojiSyncApplication(
 ) EmojiSyncApplication {
 	return &EmojiSyncApplicationImpl{
 		emojiArrayModel: emojiArrayModel,
-		emojiInfra: emojiInfra,
+		emojiInfra:      emojiInfra,
 	}
 }
 
