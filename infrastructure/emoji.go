@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
-	"github.com/usagiga/Distable/entity"
-	"github.com/usagiga/Distable/library/idiscord"
+	"github.com/usagiga/distable/entity"
+	"github.com/usagiga/distable/library/idiscord"
 )
 
 // EmojiInfraImpl is struct implemented `EmojiInfra`.

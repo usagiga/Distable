@@ -1,6 +1,6 @@
 package infrastructure
 
-import "github.com/usagiga/Distable/entity"
+import "github.com/usagiga/distable/entity"
 
 // EmojiInfra treats emojis through Discord API / CDN server.
 type EmojiInfra interface {

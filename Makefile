@@ -2,10 +2,10 @@ xxx:
 	@echo "Please select optimal option."
 
 build:
-	@go build -o Distable .
+	@go build -o distable .
 
 clean:
-	@rm -f ./Distable
+	@rm -f ./distable
 
 run:
 	@go run .

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"encoding/json"
-	"github.com/usagiga/Distable/entity"
+	"github.com/usagiga/distable/entity"
 	"io/ioutil"
 )
 
@@ -31,7 +31,7 @@ func (c *ConfigRepositoryImpl) Get() *entity.Config {
 	return c.configInstance
 }
 
-// Load loads Distable config from file.
+// Load loads distable config from file.
 // It is aimed to initialize `configInstance`.
 func (c *ConfigRepositoryImpl) Load() (config *entity.Config, err error) {
 	config = &entity.Config{}

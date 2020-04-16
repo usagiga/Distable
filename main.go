@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/usagiga/Distable/application"
-	"github.com/usagiga/Distable/domain"
-	"github.com/usagiga/Distable/infrastructure"
-	"github.com/usagiga/Distable/presentation"
-	"github.com/usagiga/Distable/repository"
+	"github.com/usagiga/distable/application"
+	"github.com/usagiga/distable/domain"
+	"github.com/usagiga/distable/infrastructure"
+	"github.com/usagiga/distable/presentation"
+	"github.com/usagiga/distable/repository"
 )
 
 const (

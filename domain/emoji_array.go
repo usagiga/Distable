@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"github.com/usagiga/Distable/entity"
+	"github.com/usagiga/distable/entity"
 )
 
 // EmojiArrayModelImpl is struct implemented `EmojiArrayModel`.

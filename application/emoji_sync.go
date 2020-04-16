@@ -2,9 +2,9 @@ package application
 
 import (
 	"fmt"
-	"github.com/usagiga/Distable/domain"
-	"github.com/usagiga/Distable/entity"
-	"github.com/usagiga/Distable/infrastructure"
+	"github.com/usagiga/distable/domain"
+	"github.com/usagiga/distable/entity"
+	"github.com/usagiga/distable/infrastructure"
 	"log"
 )
 

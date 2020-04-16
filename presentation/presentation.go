@@ -1,6 +1,6 @@
 package presentation
 
-import "github.com/usagiga/Distable/entity"
+import "github.com/usagiga/distable/entity"
 
 // EmojiSyncCommand is a view on CLI.
 // It shows results of `EmojiSyncApplications`.

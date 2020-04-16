@@ -1,8 +1,8 @@
 package presentation
 
 import (
-	"github.com/usagiga/Distable/application"
-	"github.com/usagiga/Distable/entity"
+	"github.com/usagiga/distable/application"
+	"github.com/usagiga/distable/entity"
 	"log"
 	"os"
 )

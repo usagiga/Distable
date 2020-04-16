@@ -1,6 +1,6 @@
 package application
 
-import "github.com/usagiga/Distable/entity"
+import "github.com/usagiga/distable/entity"
 
 // EmojiSyncApplication is to sync emoji among specified servers.
 type EmojiSyncApplication interface {

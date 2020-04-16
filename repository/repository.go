@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/usagiga/Distable/entity"
+import "github.com/usagiga/distable/entity"
 
 // ConfigRepository treats Distable configs.
 type ConfigRepository interface {

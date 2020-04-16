@@ -1,6 +1,6 @@
 package domain
 
-import "github.com/usagiga/Distable/entity"
+import "github.com/usagiga/distable/entity"
 
 // EmojiArrayModel is model treating `[]entity.EmojiContext`,
 // used to sync server's emoji.

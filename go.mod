@@ -1,4 +1,4 @@
-module github.com/usagiga/Distable
+module github.com/usagiga/distable
 
 go 1.14
 
