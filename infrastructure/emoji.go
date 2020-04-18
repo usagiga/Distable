@@ -118,3 +118,24 @@ func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis [
 
 	return emojis, nil
 }
+
+// Delete delets the emoji from the server.
+func (e *EmojiInfraImpl) Delete(emojiCtx *entity.EmojiContext, destServCtx *entity.ServerContext) (err error) {
+	token := destServCtx.GetBearerToken()
+	dstServID := destServCtx.GuildID
+	emojiID := emojiCtx.ID
+
+	// Establish a connection to the Discord API server.
+	discord, err := discordgo.New(token)
+	if err != nil {
+		return err
+	}
+
+	// Delete guild emoji.
+	err = discord.GuildEmojiDelete(dstServID, emojiID)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

@@ -38,3 +38,32 @@ func (e *EmojiArrayModelImpl) Unique(dst []entity.EmojiContext, src []entity.Emo
 
 	return uniqueDst
 }
+
+// Unite gets all emojis without duplicate in specified emojis.
+func (e *EmojiArrayModelImpl) Unite(serverEmojisArr [][]entity.EmojiContext) (unitedEmojis []entity.EmojiContext) {
+	unitedEmojis = []entity.EmojiContext{}
+
+	// Unite
+	for _, servEmojis := range serverEmojisArr {
+		for _, e := range servEmojis {
+			found := false
+
+			// Avoid to add redundantly
+			for _, ue := range unitedEmojis {
+				if e.Equals(&ue) {
+					found = true
+					break
+				}
+			}
+
+			if found {
+				continue
+			}
+
+			// Append
+			unitedEmojis = append(unitedEmojis, e)
+		}
+	}
+
+	return unitedEmojis
+}

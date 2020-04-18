@@ -19,6 +19,7 @@ func main() {
 
 	// Model
 	emojiArrayModel := domain.NewEmojiArrayModel()
+	serverArrayModel := domain.NewServerArrayModel()
 
 	// Repository
 	// None
@@ -27,7 +28,7 @@ func main() {
 	emojiInfra := infrastructure.NewEmojiInfra()
 
 	// Application
-	emojiSyncApplication := application.NewEmojiSyncApplication(emojiArrayModel, emojiInfra)
+	emojiSyncApplication := application.NewEmojiSyncApplication(emojiArrayModel, serverArrayModel, emojiInfra)
 
 	// Presentation
 	emojiSyncCommand := presentation.NewEmojiSyncCommand(emojiSyncApplication)

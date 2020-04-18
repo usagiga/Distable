@@ -12,4 +12,6 @@ type EmojiInfra interface {
 	FetchAll(emojiCtxs []entity.EmojiContext) (emojis []entity.Emoji, err error)
 	// FetchAllContext fetches emoji contexts on a specific server.
 	FetchAllContext(servCtx entity.ServerContext) (emojis []entity.EmojiContext, err error)
+	// Delete delets the emoji from the server.
+	Delete(emojiCtx *entity.EmojiContext, destServCtx *entity.ServerContext) (err error)
 }

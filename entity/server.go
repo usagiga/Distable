@@ -9,6 +9,9 @@ type ServerContext struct {
 	// GuildID is ID of guild on Discord.
 	// A.k.a. Server ID.
 	GuildID string `json:"guild_id"`
+	// ServerType means the server is master or slave.
+	// If you leave it not decided, it means master.
+	ServerType ServerType `json:"type"`
 }
 
 // GetBearerToken generates the body of `Authorization` HTTP header.
