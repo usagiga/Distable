@@ -1,6 +1,9 @@
 package infrastructure
 
-import "github.com/usagiga/distable/entity"
+import (
+	"context"
+	"github.com/usagiga/distable/entity"
+)
 
 // EmojiInfra treats emojis through Discord API / CDN server.
 type EmojiInfra interface {
@@ -14,4 +17,12 @@ type EmojiInfra interface {
 	FetchAllContext(servCtx entity.ServerContext) (emojis []entity.EmojiContext, err error)
 	// Delete delets the emoji from the server.
 	Delete(destServCtx *entity.ServerContext, emojiCtx *entity.EmojiContext) (err error)
+}
+
+// EmojiStreamInfra treats the events on Discord API server.
+// Particularly about updating emojis.
+type EmojiStreamInfra interface {
+	// WatchUpdatingEmoji waits updating emoji on specified servers
+	// and notifies about it to the handler.
+	WatchUpdatingEmoji(ctx context.Context, handler entity.OnUpdatedEmojiHandler) (err error)
 }
