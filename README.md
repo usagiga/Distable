@@ -41,9 +41,13 @@ NOTICE : You can put 3 or more servers into it.
 
 ```json:example
 {
+  "credential": {
+    "bot_token": "YOUR_DISCORD_BOT_TOKEN"
+  },
   "servers": [
-    {"auth_token": "YOUR_APP'S_BOT_TOKEN_HERE", "guild_id": "A_SERVER_ID"},
-    {"auth_token": "YOUR_APP'S_BOT_TOKEN_HERE", "guild_id": "B_SERVER_ID"}
+    {"guild_id": "YOUR_SERVER'S_ID"},
+    {"guild_id": "YOUR_SERVER'S_ID"},
+    {"guild_id": "YOUR_SERVER'S_ID"}
   ]
 }
 ```
