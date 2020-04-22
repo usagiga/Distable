@@ -13,6 +13,9 @@ const (
 )
 
 func main() {
+	// Parse args
+	useStream := ParseArgs()
+
 	// Config
 	configRepos := repository.NewConfigRepository(configPath)
 	config := configRepos.Get()
@@ -28,13 +31,21 @@ func main() {
 
 	// Infrastructure
 	emojiInfra := infrastructure.NewEmojiInfra(cred)
+	emojiStreamInfra := infrastructure.NewEmojiStreamInfra(cred)
 
 	// Application
 	emojiSyncApplication := application.NewEmojiSyncApplication(emojiArrayModel, serverArrayModel, emojiInfra)
+	emojiSyncStreamApplication := application.NewEmojiSyncStreamApplication(emojiSyncApplication, emojiStreamInfra)
 
 	// Presentation
 	emojiSyncCommand := presentation.NewEmojiSyncCommand(emojiSyncApplication)
+	emojiSyncStreamCommand := presentation.NewEmojiSyncStreamCommand(emojiSyncStreamApplication)
 
 	// Run app
-	emojiSyncCommand.Sync(servers)
+	switch {
+	case useStream:
+		emojiSyncStreamCommand.RunSyncService(servers)
+	default:
+		emojiSyncCommand.Sync(servers)
+	}
 }
