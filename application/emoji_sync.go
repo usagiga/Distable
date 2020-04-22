@@ -115,7 +115,7 @@ func (e *EmojiSyncApplicationImpl) applyEmojis(tgtServInv *entity.ServerEmojiInv
 
 	// Add all adding emojis
 	for _, emoji := range addingEmojis {
-		err = e.emojiInfra.Add(&emoji, &dstServCtx)
+		err = e.emojiInfra.Add(&dstServCtx, &emoji)
 		if err != nil {
 			return err
 		}
@@ -125,7 +125,7 @@ func (e *EmojiSyncApplicationImpl) applyEmojis(tgtServInv *entity.ServerEmojiInv
 
 	// Delete all emojis to delete
 	for _, eCtx := range deletingEmojiCtxs {
-		err = e.emojiInfra.Delete(&eCtx, &dstServCtx)
+		err = e.emojiInfra.Delete(&dstServCtx, &eCtx)
 		if err != nil {
 			return err
 		}

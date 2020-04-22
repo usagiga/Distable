@@ -16,6 +16,8 @@ func main() {
 	// Config
 	configRepos := repository.NewConfigRepository(configPath)
 	config := configRepos.Get()
+	servers := config.Servers
+	cred := config.Credential
 
 	// Model
 	emojiArrayModel := domain.NewEmojiArrayModel()
@@ -25,7 +27,7 @@ func main() {
 	// None
 
 	// Infrastructure
-	emojiInfra := infrastructure.NewEmojiInfra()
+	emojiInfra := infrastructure.NewEmojiInfra(cred)
 
 	// Application
 	emojiSyncApplication := application.NewEmojiSyncApplication(emojiArrayModel, serverArrayModel, emojiInfra)
@@ -34,6 +36,5 @@ func main() {
 	emojiSyncCommand := presentation.NewEmojiSyncCommand(emojiSyncApplication)
 
 	// Run app
-	servers := config.Servers
 	emojiSyncCommand.Sync(servers)
 }

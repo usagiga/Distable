@@ -9,16 +9,20 @@ import (
 )
 
 // EmojiInfraImpl is struct implemented `EmojiInfra`.
-type EmojiInfraImpl struct{}
+type EmojiInfraImpl struct{
+	accessToken *entity.Credential
+}
 
 // NewEmojiInfra initializes `EmojiInfra`.
-func NewEmojiInfra() EmojiInfra {
-	return &EmojiInfraImpl{}
+func NewEmojiInfra(accessToken *entity.Credential) EmojiInfra {
+	return &EmojiInfraImpl{
+		accessToken: accessToken,
+	}
 }
 
 // Add adds emoji into a specific server.
-func (e *EmojiInfraImpl) Add(emoji *entity.Emoji, destServCtx *entity.ServerContext) (err error) {
-	token := destServCtx.GetBearerToken()
+func (e *EmojiInfraImpl) Add(destServCtx *entity.ServerContext, emoji *entity.Emoji) (err error) {
+	token := e.accessToken.GetBearerToken()
 	name := emoji.Name
 	imgURI := emoji.ToURIString()
 
@@ -86,7 +90,7 @@ func (e *EmojiInfraImpl) FetchAll(emojiCtxs []entity.EmojiContext) (emojis []ent
 func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis []entity.EmojiContext, err error) {
 	emojis = []entity.EmojiContext{}
 	guildID := servCtx.GuildID
-	token := servCtx.GetBearerToken()
+	token := e.accessToken.GetBearerToken()
 
 	// Establish a connection to the Discord API server.
 	discord, err := discordgo.New(token)
@@ -120,8 +124,8 @@ func (e *EmojiInfraImpl) FetchAllContext(servCtx entity.ServerContext) (emojis [
 }
 
 // Delete delets the emoji from the server.
-func (e *EmojiInfraImpl) Delete(emojiCtx *entity.EmojiContext, destServCtx *entity.ServerContext) (err error) {
-	token := destServCtx.GetBearerToken()
+func (e *EmojiInfraImpl) Delete(destServCtx *entity.ServerContext, emojiCtx *entity.EmojiContext) (err error) {
+	token := e.accessToken.GetBearerToken()
 	dstServID := destServCtx.GuildID
 	emojiID := emojiCtx.ID
 
