@@ -1,12 +1,10 @@
 {
+  "credential": {
+    "bot_token": "YOUR_DISCORD_BOT_TOKEN"
+  },
   "servers": [
-    {
-      "auth_token": "YOUR_APP'S_BOT_TOKEN_HERE",
-      "guild_id": "A_SERVER_ID"
-    },
-    {
-      "auth_token": "YOUR_APP'S_BOT_TOKEN_HERE",
-      "guild_id": "B_SERVER_ID"
-    }
+    {"guild_id": "YOUR_SERVER'S_ID"},
+    {"guild_id": "YOUR_SERVER'S_ID", "type":0},
+    {"guild_id": "YOUR_SERVER'S_ID", "type":1}
   ]
 }
