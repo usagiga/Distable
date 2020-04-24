@@ -44,6 +44,7 @@ func (e *EmojiSyncStreamCommandImpl) RunSyncService(servers []entity.ServerConte
 
 	select {
 	case <-interrupt:
+		log.Println("Keyboard Interrupt is detected. Quiting...")
 		cancel()
 	case err := <-errCh:
 		log.Fatal("Error raised: ", err)
